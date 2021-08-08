@@ -1,0 +1,17 @@
+﻿<ui:ContentDialog x:Class="AccountManager.View.DeleteAskDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:AccountManager.ViewModel"
+        xmlns:local="clr-namespace:AccountManager.View"
+        mc:Ignorable="d"
+        Title="Delete Account?"
+        PrimaryButtonText="OK"
+        CloseButtonText="Cancel"
+        DefaultButton="Primary">
+    <StackPanel VerticalAlignment="Center">
+        <TextBlock Text="Deleted accounts cannot be recovered"/>
+    </StackPanel>
+</ui:ContentDialog>

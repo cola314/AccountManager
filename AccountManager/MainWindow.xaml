@@ -1,0 +1,66 @@
+﻿<Window x:Class="AccountManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:behaviours="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:AccountManager.ViewModel"
+        xmlns:local="clr-namespace:AccountManager"
+        mc:Ignorable="d"
+        Title="AccountManager" Height="600" Width="1100"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    <behaviours:Interaction.Triggers>
+        <behaviours:EventTrigger EventName="Loaded">
+            <behaviours:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </behaviours:EventTrigger>
+    </behaviours:Interaction.Triggers>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!--
+        <DockPanel LastChildFill="False">
+            <ui:SimpleStackPanel Orientation="Horizontal" Spacing="10" DockPanel.Dock="Right">
+                <ComboBox DockPanel.Dock="Left" Width="150">
+                    <ComboBoxItem Content="Site" IsSelected="True"/>
+                    <ComboBoxItem Content="ID"/>
+                    <ComboBoxItem Content="Description"/>
+                </ComboBox>
+                <ui:AutoSuggestBox DockPanel.Dock="Right" Width="450"/>
+            </ui:SimpleStackPanel>
+        </DockPanel>
+        -->
+        
+        <ListView Grid.Row="1" Margin="0,20,0,20" ItemsSource="{Binding Accounts}">
+            <behaviours:Interaction.Triggers>
+                <behaviours:EventTrigger EventName="SelectionChanged">
+                    <behaviours:InvokeCommandAction Command="{Binding AccountSelectionChanged}" PassEventArgsToCommand="True"/>
+                </behaviours:EventTrigger>
+            </behaviours:Interaction.Triggers>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Site" DisplayMemberBinding="{Binding Site}" Width="200"/>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="200"/>
+                    <GridViewColumn Header="Password" DisplayMemberBinding="{Binding Password}" Width="200"/>
+                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="350"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <DockPanel Grid.Row="2" LastChildFill="False">
+            <ui:SimpleStackPanel Orientation="Horizontal" Spacing="10" DockPanel.Dock="Right">
+                <Button Content="Change Account Details" Command="{Binding ChangeAccount}"/>
+                <Button Content="Delete Account" Command="{Binding DeleteAccount}"/>
+                <Button Content="Add New Account" Command="{Binding AddAccount}" Style="{StaticResource AccentButtonStyle}"/>
+            </ui:SimpleStackPanel>
+        </DockPanel>
+
+    </Grid>
+</Window>
