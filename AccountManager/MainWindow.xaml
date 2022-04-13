@@ -5,6 +5,7 @@
         xmlns:behaviours="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:AccountManager.ViewModel"
+        xmlns:prop="clr-namespace:AccountManager.Properties"
         xmlns:local="clr-namespace:AccountManager"
         mc:Ignorable="d"
         Title="AccountManager" Height="600" Width="1100"
@@ -46,19 +47,26 @@
             </behaviours:Interaction.Triggers>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Site" DisplayMemberBinding="{Binding Site}" Width="200"/>
-                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="200"/>
-                    <GridViewColumn Header="Password" DisplayMemberBinding="{Binding Password}" Width="200"/>
-                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="350"/>
+                    <GridViewColumn Header="{x:Static prop:Resources.SITE}" Width="200"
+                                    DisplayMemberBinding="{Binding Site}"/>
+                    <GridViewColumn Header="{x:Static prop:Resources.ID}" Width="200"
+                                    DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="{x:Static prop:Resources.PASSWORD}" Width="200"
+                                    DisplayMemberBinding="{Binding Password}"/>
+                    <GridViewColumn Header="{x:Static prop:Resources.DESCRIPTION}" Width="350"
+                                    DisplayMemberBinding="{Binding Description}"/>
                 </GridView>
             </ListView.View>
         </ListView>
 
         <DockPanel Grid.Row="2" LastChildFill="False">
             <ui:SimpleStackPanel Orientation="Horizontal" Spacing="10" DockPanel.Dock="Right">
-                <Button Content="Change Account Details" Command="{Binding ChangeAccount}"/>
-                <Button Content="Delete Account" Command="{Binding DeleteAccount}"/>
-                <Button Content="Add New Account" Command="{Binding AddAccount}" Style="{StaticResource AccentButtonStyle}"/>
+                <Button Content="{x:Static prop:Resources.CHANGE_ACCOUNT_DEETAILS}" 
+                        Command="{Binding ChangeAccount}"/>
+                <Button Content="{x:Static prop:Resources.DELETE_ACCOUNT}" 
+                        Command="{Binding DeleteAccount}"/>
+                <Button Content="{x:Static prop:Resources.ADD_NEW_ACCOUNT}" Style="{StaticResource AccentButtonStyle}"
+                        Command="{Binding AddAccount}"/>
             </ui:SimpleStackPanel>
         </DockPanel>
 

@@ -4,17 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AccountManager.View"
-        mc:Ignorable="d"
-        Title="Account" Height="500" Width="400"
+        xmlns:prop="clr-namespace:AccountManager.Properties"
         xmlns:ui="http://schemas.modernwpf.com/2019"
-        PrimaryButtonText="OK"
+        mc:Ignorable="d"
+        Title="{x:Static prop:Resources.ACCOUNT}" Height="500" Width="400"
+        PrimaryButtonText="{x:Static prop:Resources.OK}"
         DefaultButton="Primary"
-        SecondaryButtonText="Cancel">
+        SecondaryButtonText="{x:Static prop:Resources.CANCEL}">
     <ui:SimpleStackPanel Spacing="12">
-        <TextBox ui:ControlHelper.Header="Site" Text="{Binding Site}"/>
-        <TextBox ui:ControlHelper.Header="ID" Text="{Binding Id}"/>
-        <TextBox ui:ControlHelper.Header="Password" Text="{Binding Password}"/>
-        <TextBox ui:ControlHelper.Header="Description" Text="{Binding Description}"
+        <TextBox ui:ControlHelper.Header="{x:Static prop:Resources.SITE}" Text="{Binding Site}"/>
+        <TextBox ui:ControlHelper.Header="{x:Static prop:Resources.ID}" Text="{Binding Id}"/>
+        <TextBox ui:ControlHelper.Header="{x:Static prop:Resources.PASSWORD}" Text="{Binding Password}"/>
+        <TextBox ui:ControlHelper.Header="{x:Static prop:Resources.DESCRIPTION}" Text="{Binding Description}"
                  MaxHeight="150" TextWrapping="Wrap" AcceptsReturn="True"/>
     </ui:SimpleStackPanel>
 </ui:ContentDialog>
