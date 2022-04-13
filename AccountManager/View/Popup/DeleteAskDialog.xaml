@@ -6,12 +6,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:AccountManager.ViewModel"
         xmlns:local="clr-namespace:AccountManager.View"
+        xmlns:prop="clr-namespace:AccountManager.Properties"
         mc:Ignorable="d"
-        Title="Delete Account?"
-        PrimaryButtonText="OK"
-        CloseButtonText="Cancel"
+        Title="{x:Static prop:Resources.DELETE_ACCOUNT_MSG}"
+        PrimaryButtonText="{x:Static prop:Resources.OK}"
+        CloseButtonText="{x:Static prop:Resources.CANCEL}"
         DefaultButton="Primary">
     <StackPanel VerticalAlignment="Center">
-        <TextBlock Text="Deleted accounts cannot be recovered"/>
+        <TextBlock Text="{x:Static prop:Resources.DELETE_ACCOUNT_DESC}"/>
     </StackPanel>
 </ui:ContentDialog>
