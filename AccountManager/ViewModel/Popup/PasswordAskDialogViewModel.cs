@@ -1,5 +1,5 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace AccountManager.ViewModel
 {
-    public class PasswordAskDialogViewModel : ViewModelBase
+    public class PasswordAskDialogViewModel : ObservableRecipient
     {
         public string Password { get; private set; } = "";
 

@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,50 +7,34 @@ using System.Threading.Tasks;
 
 namespace AccountManager.Model
 {
-    public class Account : ViewModelBase
+    public class Account : ObservableObject 
     {
         private string site_;
         public string Site
         {
             get => site_;
-            set
-            {
-                site_ = value;
-                RaisePropertyChanged(() => Site);
-            }
+            set => SetProperty(ref site_, value);
         }
 
         public string id_;
         public string Id
         {
             get => id_;
-            set
-            {
-                id_ = value;
-                RaisePropertyChanged(() => Id);
-            }
+            set => SetProperty(ref id_, value);
         }
 
         public string password_;
         public string Password
         {
             get => password_;
-            set
-            {
-                password_ = value;
-                RaisePropertyChanged(() => Password);
-            }
+            set => SetProperty(ref password_, value);
         }
 
         public string description_;
         public string Description
         {
             get => description_;
-            set
-            {
-                description_ = value;
-                RaisePropertyChanged(() => Description);
-            }
+            set => SetProperty(ref description_, value);
         }
 
         public Account Clone()

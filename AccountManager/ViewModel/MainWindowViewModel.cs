@@ -1,8 +1,8 @@
 ﻿using AccountManager.Model;
 using AccountManager.Util;
 using AccountManager.View;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
 using ModernWpf.Controls;
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ using System.Windows.Input;
 
 namespace AccountManager.ViewModel
 {
-    public class MainWindowViewModel : ViewModelBase
+    public class MainWindowViewModel : ObservableRecipient
     {
         public MainWindowViewModel()
         {
@@ -70,22 +70,14 @@ namespace AccountManager.ViewModel
         public ObservableCollection<Account> Accounts
         {
             get => accounts_;
-            set
-            {
-                accounts_ = value;
-                RaisePropertyChanged(() => Accounts);
-            }
+            set => SetProperty(ref accounts_, value);
         }
 
         private ObservableCollection<Account> selectedAccounts_ = new ObservableCollection<Account>();
         public ObservableCollection<Account> SelectedAccounts
         {
             get => selectedAccounts_;
-            set
-            {
-                selectedAccounts_ = value;
-                RaisePropertyChanged(() => SelectedAccounts);
-            }
+            set => SetProperty(ref selectedAccounts_, value);
         }
 
         public ICommand AccountSelectionChanged
@@ -103,6 +95,8 @@ namespace AccountManager.ViewModel
                     {
                         SelectedAccounts.Remove(item);
                     }
+                    OnPropertyChanged(nameof(ChangeAccount));
+                    OnPropertyChanged(nameof(DeleteAccount));
                 });
             }
         }
