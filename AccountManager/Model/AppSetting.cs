@@ -4,9 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AccountManager.Model
 {
@@ -20,17 +17,13 @@ namespace AccountManager.Model
         }
 
         public static AppSetting Instance { get; private set; } = new AppSetting();
-
-        [JsonIgnore]
-        public string password_;
+        
+        private string _password;
         [JsonIgnore]
         public string Password
         {
-            get => AESTool.Decrypt(password_, "password_");
-            set
-            {
-                password_ = AESTool.Encrypt(value, "password_");
-            }
+            get => AesTool.Decrypt(_password, "_password");
+            set => _password = AesTool.Encrypt(value, "_password");
         }
 
         public List<Account> Accounts { get; set; } = new List<Account>();
@@ -39,15 +32,15 @@ namespace AccountManager.Model
         {
             try
             {
-                string data = AESTool.Encrypt(JsonConvert.SerializeObject(AppSetting.Instance), Password);
+                string data = AesTool.Encrypt(JsonConvert.SerializeObject(AppSetting.Instance), Password);
 
-                if(!Directory.Exists(SETTING_FOLDER))
+                if (!Directory.Exists(SETTING_FOLDER))
                 {
                     Directory.CreateDirectory(SETTING_FOLDER);
                 }
                 File.WriteAllText(SETTING_FILE, data);
             }
-            catch(Exception ex)
+            catch (Exception)
             {
                 //TODO logging
             }
@@ -60,7 +53,7 @@ namespace AccountManager.Model
                 return;
             }
             string data = File.ReadAllText(SETTING_FILE);
-            Instance = JsonConvert.DeserializeObject<AppSetting>(AESTool.Decrypt(data, Password));
+            Instance = JsonConvert.DeserializeObject<AppSetting>(AesTool.Decrypt(data, Password));
             Instance.Password = Password;
         }
     }

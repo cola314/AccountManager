@@ -66,7 +66,7 @@
 
             <DockPanel Grid.Row="2" LastChildFill="False">
                 <ui:SimpleStackPanel Orientation="Horizontal" Spacing="10" DockPanel.Dock="Right">
-                    <Button Content="{x:Static prop:Resources.CHANGE_ACCOUNT_DEETAILS}" 
+                    <Button Content="{x:Static prop:Resources.CHANGE_ACCOUNT_DETAILS}" 
                             Command="{Binding ChangeAccount}"/>
                     <Button Content="{x:Static prop:Resources.DELETE_ACCOUNT}" 
                             Command="{Binding DeleteAccount}"/>

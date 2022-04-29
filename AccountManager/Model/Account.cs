@@ -1,40 +1,35 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AccountManager.Model
 {
-    public class Account : ObservableObject 
+    public class Account : ObservableObject
     {
-        private string site_;
+        private string _site;
         public string Site
         {
-            get => site_;
-            set => SetProperty(ref site_, value);
+            get => _site;
+            set => SetProperty(ref _site, value);
         }
 
-        public string id_;
+        private string _id;
         public string Id
         {
-            get => id_;
-            set => SetProperty(ref id_, value);
+            get => _id;
+            set => SetProperty(ref _id, value);
         }
 
-        public string password_;
+        private string _password;
         public string Password
         {
-            get => password_;
-            set => SetProperty(ref password_, value);
+            get => _password;
+            set => SetProperty(ref _password, value);
         }
 
-        public string description_;
+        private string _description;
         public string Description
         {
-            get => description_;
-            set => SetProperty(ref description_, value);
+            get => _description;
+            set => SetProperty(ref _description, value);
         }
 
         public Account Clone()

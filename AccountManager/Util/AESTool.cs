@@ -1,27 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace AccountManager.Util
 {
-    internal static class AESTool
+    internal static class AesTool
     {
         private static Rfc2898DeriveBytes CreateKeyBytes(string key)
         {
             byte[] keyBytes = Encoding.UTF8.GetBytes(key);
-            byte[] saltBytes = SHATool.GetSHA256Hash(key);
+            byte[] saltBytes = ShaTool.GetSha256Hash(key);
             return new Rfc2898DeriveBytes(keyBytes, saltBytes, 541);
         }
 
         public static string Decrypt(string input, string key)
         {
-            Rfc2898DeriveBytes keyBytes = CreateKeyBytes(key);
-
-            RijndaelManaged aes = new RijndaelManaged();
+            var keyBytes = CreateKeyBytes(key);
+            var aes = new RijndaelManaged();
             aes.KeySize = 256;
             aes.BlockSize = 128;
             aes.Mode = CipherMode.CBC;
@@ -47,9 +43,8 @@ namespace AccountManager.Util
 
         public static string Encrypt(string input, string key)
         {
-            Rfc2898DeriveBytes keyBytes = CreateKeyBytes(key);
-
-            RijndaelManaged aes = new RijndaelManaged();
+            var keyBytes = CreateKeyBytes(key);
+            var aes = new RijndaelManaged();
             aes.KeySize = 256;
             aes.BlockSize = 128;
             aes.Mode = CipherMode.CBC;

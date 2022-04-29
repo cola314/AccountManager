@@ -66,8 +66,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Util\AESTool.cs" />
-    <Compile Include="Util\SHATool.cs" />
+    <Compile Include="Util\AesTool.cs" />
+    <Compile Include="Util\ShaTool.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\Popup\PasswordAskDialogViewModel.cs" />
     <Compile Include="View\Popup\AccountView.xaml.cs">

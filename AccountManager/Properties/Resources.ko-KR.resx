@@ -126,7 +126,7 @@
   <data name="CANCEL" xml:space="preserve">
     <value>취소</value>
   </data>
-  <data name="CHANGE_ACCOUNT_DEETAILS" xml:space="preserve">
+  <data name="CHANGE_ACCOUNT_DETAILS" xml:space="preserve">
     <value>계정 정보 수정</value>
   </data>
   <data name="DELETE_ACCOUNT" xml:space="preserve">

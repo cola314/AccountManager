@@ -1,39 +1,33 @@
 ﻿using AccountManager.Model;
-using AccountManager.Util;
 using AccountManager.View;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using ModernWpf.Controls;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using AccountManager.ViewModel.Popup;
 
 namespace AccountManager.ViewModel
 {
     public class MainWindowViewModel : ObservableRecipient
     {
-        public MainWindowViewModel()
-        {
-        }
-
         public ICommand LoadedCommand
         {
             get
             {
-                return new RelayCommand(async () =>
+                return new AsyncRelayCommand(async () =>
                 {
                     try
                     {
                         await SetPassword();
                     }
-                    catch(Exception ex)
+                    catch (Exception)
                     {
-
+                        // ignored
                     }
                 });
             }
@@ -52,7 +46,7 @@ namespace AccountManager.ViewModel
                         AppSetting.Instance.Load();
                         Accounts = new ObservableCollection<Account>(AppSetting.Instance.Accounts);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         await SetPassword();
                     }
@@ -66,18 +60,18 @@ namespace AccountManager.ViewModel
             AppSetting.Instance.Save();
         }
 
-        private ObservableCollection<Account> accounts_ = new ObservableCollection<Account>();
+        private ObservableCollection<Account> _accounts = new ObservableCollection<Account>();
         public ObservableCollection<Account> Accounts
         {
-            get => accounts_;
-            set => SetProperty(ref accounts_, value);
+            get => _accounts;
+            set => SetProperty(ref _accounts, value);
         }
 
-        private ObservableCollection<Account> selectedAccounts_ = new ObservableCollection<Account>();
+        private ObservableCollection<Account> _selectedAccounts = new ObservableCollection<Account>();
         public ObservableCollection<Account> SelectedAccounts
         {
-            get => selectedAccounts_;
-            set => SetProperty(ref selectedAccounts_, value);
+            get => _selectedAccounts;
+            set => SetProperty(ref _selectedAccounts, value);
         }
 
         public ICommand AccountSelectionChanged
@@ -86,12 +80,12 @@ namespace AccountManager.ViewModel
             {
                 return new RelayCommand<SelectionChangedEventArgs>(args =>
                 {
-                    foreach(Account item in args.AddedItems)
+                    foreach (Account item in args.AddedItems)
                     {
                         SelectedAccounts.Add(item);
                     }
 
-                    foreach(Account item in args.RemovedItems)
+                    foreach (Account item in args.RemovedItems)
                     {
                         SelectedAccounts.Remove(item);
                     }
@@ -105,13 +99,15 @@ namespace AccountManager.ViewModel
         {
             get
             {
-                return new RelayCommand(async () =>
+                return new AsyncRelayCommand(async () =>
                 {
                     var selectedAccount = SelectedAccounts.First();
                     var viewModel = selectedAccount.Clone();
-                    var dialog = new AccountView();
-                    dialog.DataContext = viewModel;
-                    if (await dialog.ShowAsync(ModernWpf.Controls.ContentDialogPlacement.InPlace) == ContentDialogResult.Primary)
+                    var dialog = new AccountView
+                    {
+                        DataContext = viewModel
+                    };
+                    if (await dialog.ShowAsync(ContentDialogPlacement.InPlace) == ContentDialogResult.Primary)
                     {
                         selectedAccount.CopyFrom(viewModel);
                     }
@@ -124,7 +120,7 @@ namespace AccountManager.ViewModel
         {
             get
             {
-                return new RelayCommand(async () =>
+                return new AsyncRelayCommand(async () =>
                 {
                     if (await new DeleteAskDialog().ShowAsync() == ContentDialogResult.Primary)
                     {
@@ -142,12 +138,14 @@ namespace AccountManager.ViewModel
         {
             get
             {
-                return new RelayCommand(async () =>
+                return new AsyncRelayCommand(async () =>
                 {
                     var viewModel = new Account();
-                    var dialog = new AccountView();
-                    dialog.DataContext = viewModel;
-                    if (await dialog.ShowAsync(ModernWpf.Controls.ContentDialogPlacement.InPlace) == ContentDialogResult.Primary)
+                    var dialog = new AccountView
+                    {
+                        DataContext = viewModel
+                    };
+                    if (await dialog.ShowAsync(ContentDialogPlacement.InPlace) == ContentDialogResult.Primary)
                     {
                         Accounts.Add(viewModel);
                     }
