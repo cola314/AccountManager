@@ -19,56 +19,62 @@
             <behaviours:InvokeCommandAction Command="{Binding LoadedCommand}"/>
         </behaviours:EventTrigger>
     </behaviours:Interaction.Triggers>
-    <Grid Margin="20">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <ui:NavigationView IsSettingsVisible="False">
+        <ui:NavigationView.MenuItems>
+            <ui:NavigationViewItem Icon="Library" Content="{x:Static prop:Resources.ACCOUNT}" IsSelected="True"/>
+        </ui:NavigationView.MenuItems>
 
-        <!--
-        <DockPanel LastChildFill="False">
-            <ui:SimpleStackPanel Orientation="Horizontal" Spacing="10" DockPanel.Dock="Right">
-                <ComboBox DockPanel.Dock="Left" Width="150">
-                    <ComboBoxItem Content="Site" IsSelected="True"/>
-                    <ComboBoxItem Content="ID"/>
-                    <ComboBoxItem Content="Description"/>
-                </ComboBox>
-                <ui:AutoSuggestBox DockPanel.Dock="Right" Width="450"/>
-            </ui:SimpleStackPanel>
-        </DockPanel>
-        -->
-        
-        <ListView Grid.Row="1" Margin="0,20,0,20" ItemsSource="{Binding Accounts}">
-            <behaviours:Interaction.Triggers>
-                <behaviours:EventTrigger EventName="SelectionChanged">
-                    <behaviours:InvokeCommandAction Command="{Binding AccountSelectionChanged}" PassEventArgsToCommand="True"/>
-                </behaviours:EventTrigger>
-            </behaviours:Interaction.Triggers>
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="{x:Static prop:Resources.SITE}" Width="200"
-                                    DisplayMemberBinding="{Binding Site}"/>
-                    <GridViewColumn Header="{x:Static prop:Resources.ID}" Width="200"
-                                    DisplayMemberBinding="{Binding Id}"/>
-                    <GridViewColumn Header="{x:Static prop:Resources.PASSWORD}" Width="200"
-                                    DisplayMemberBinding="{Binding Password}"/>
-                    <GridViewColumn Header="{x:Static prop:Resources.DESCRIPTION}" Width="350"
-                                    DisplayMemberBinding="{Binding Description}"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+            <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <DockPanel Grid.Row="2" LastChildFill="False">
-            <ui:SimpleStackPanel Orientation="Horizontal" Spacing="10" DockPanel.Dock="Right">
-                <Button Content="{x:Static prop:Resources.CHANGE_ACCOUNT_DEETAILS}" 
-                        Command="{Binding ChangeAccount}"/>
-                <Button Content="{x:Static prop:Resources.DELETE_ACCOUNT}" 
-                        Command="{Binding DeleteAccount}"/>
-                <Button Content="{x:Static prop:Resources.ADD_NEW_ACCOUNT}" Style="{StaticResource AccentButtonStyle}"
-                        Command="{Binding AddAccount}"/>
-            </ui:SimpleStackPanel>
-        </DockPanel>
+            <!--
+            <DockPanel LastChildFill="False">
+                <ui:SimpleStackPanel Orientation="Horizontal" Spacing="10" DockPanel.Dock="Right">
+                    <ComboBox DockPanel.Dock="Left" Width="150">
+                        <ComboBoxItem Content="Site" IsSelected="True"/>
+                        <ComboBoxItem Content="ID"/>
+                        <ComboBoxItem Content="Description"/>
+                    </ComboBox>
+                    <ui:AutoSuggestBox DockPanel.Dock="Right" Width="450"/>
+                </ui:SimpleStackPanel>
+            </DockPanel>
+            -->
+            
+            <ListView Grid.Row="1" Margin="0,20,0,20" ItemsSource="{Binding Accounts}">
+                <behaviours:Interaction.Triggers>
+                    <behaviours:EventTrigger EventName="SelectionChanged">
+                        <behaviours:InvokeCommandAction Command="{Binding AccountSelectionChanged}" PassEventArgsToCommand="True"/>
+                    </behaviours:EventTrigger>
+                </behaviours:Interaction.Triggers>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="{x:Static prop:Resources.SITE}" Width="200"
+                                        DisplayMemberBinding="{Binding Site}"/>
+                        <GridViewColumn Header="{x:Static prop:Resources.ID}" Width="200"
+                                        DisplayMemberBinding="{Binding Id}"/>
+                        <GridViewColumn Header="{x:Static prop:Resources.PASSWORD}" Width="200"
+                                        DisplayMemberBinding="{Binding Password}"/>
+                        <GridViewColumn Header="{x:Static prop:Resources.DESCRIPTION}" Width="350"
+                                        DisplayMemberBinding="{Binding Description}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
 
-    </Grid>
+            <DockPanel Grid.Row="2" LastChildFill="False">
+                <ui:SimpleStackPanel Orientation="Horizontal" Spacing="10" DockPanel.Dock="Right">
+                    <Button Content="{x:Static prop:Resources.CHANGE_ACCOUNT_DEETAILS}" 
+                            Command="{Binding ChangeAccount}"/>
+                    <Button Content="{x:Static prop:Resources.DELETE_ACCOUNT}" 
+                            Command="{Binding DeleteAccount}"/>
+                    <Button Content="{x:Static prop:Resources.ADD_NEW_ACCOUNT}" Style="{StaticResource AccentButtonStyle}"
+                            Command="{Binding AddAccount}"/>
+                </ui:SimpleStackPanel>
+            </DockPanel>
+
+        </Grid>
+    </ui:NavigationView>
 </Window>
