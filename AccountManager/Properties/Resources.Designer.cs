@@ -97,6 +97,24 @@ namespace AccountManager.Properties {
         }
         
         /// <summary>
+        ///   Copy ID과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string COPY_ID {
+            get {
+                return ResourceManager.GetString("COPY_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Copy Password과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string COPY_PASSWORD {
+            get {
+                return ResourceManager.GetString("COPY_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Delete Account과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string DELETE_ACCOUNT {

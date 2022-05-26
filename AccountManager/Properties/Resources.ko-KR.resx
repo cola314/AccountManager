@@ -129,6 +129,12 @@
   <data name="CHANGE_ACCOUNT_DETAILS" xml:space="preserve">
     <value>계정 정보 수정</value>
   </data>
+  <data name="COPY_ID" xml:space="preserve">
+    <value>아이디 복사</value>
+  </data>
+  <data name="COPY_PASSWORD" xml:space="preserve">
+    <value>비밀번호 복사</value>
+  </data>
   <data name="DELETE_ACCOUNT" xml:space="preserve">
     <value>계정 삭제</value>
   </data>

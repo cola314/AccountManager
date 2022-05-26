@@ -129,6 +129,12 @@
   <data name="CHANGE_ACCOUNT_DETAILS" xml:space="preserve">
     <value>Change Account Details</value>
   </data>
+  <data name="COPY_ID" xml:space="preserve">
+    <value>Copy ID</value>
+  </data>
+  <data name="COPY_PASSWORD" xml:space="preserve">
+    <value>Copy Password</value>
+  </data>
   <data name="DELETE_ACCOUNT" xml:space="preserve">
     <value>Delete Account</value>
   </data>

@@ -7,6 +7,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using AccountManager.ViewModel.Popup;
@@ -91,6 +92,8 @@ namespace AccountManager.ViewModel
                     }
                     OnPropertyChanged(nameof(ChangeAccount));
                     OnPropertyChanged(nameof(DeleteAccount));
+                    OnPropertyChanged(nameof(CopyIdCommand));
+                    OnPropertyChanged(nameof(CopyPasswordCommand));
                 });
             }
         }
@@ -151,6 +154,28 @@ namespace AccountManager.ViewModel
                     }
                     SaveAccount();
                 });
+            }
+        }
+
+        public ICommand CopyIdCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    Clipboard.SetText(SelectedAccounts.First().Id);
+                }, () => SelectedAccounts.Count == 1);
+            }
+        }
+
+        public ICommand CopyPasswordCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    Clipboard.SetText(SelectedAccounts.First().Password);
+                }, () => SelectedAccounts.Count == 1);
             }
         }
     }
