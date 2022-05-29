@@ -1,11 +1,11 @@
-﻿using AccountManager.Util;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using AccountManager.Util;
+using Newtonsoft.Json;
 
-namespace AccountManager.Model
+namespace AccountManager.Models
 {
     internal class AppSetting
     {

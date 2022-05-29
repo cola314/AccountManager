@@ -1,8 +1,8 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+﻿using Prism.Mvvm;
 
-namespace AccountManager.Model
+namespace AccountManager.Models
 {
-    public class Account : ObservableObject
+    public class Account : BindableBase
     {
         private string _site;
         public string Site

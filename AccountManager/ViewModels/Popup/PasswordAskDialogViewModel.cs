@@ -1,23 +1,24 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.Toolkit.Mvvm.Input;
+using Prism.Commands;
+using Prism.Mvvm;
 
 namespace AccountManager.ViewModels.Popup
 {
-    public class PasswordAskDialogViewModel : ObservableRecipient
+    public class PasswordAskDialogViewModel : BindableBase
     {
+        public ICommand PasswordChangedCommand { get; }
+
+        public PasswordAskDialogViewModel()
+        {
+            PasswordChangedCommand = new DelegateCommand<PasswordBox>(PasswordChanged);
+        }
+
         public string Password { get; private set; } = "";
 
-        public ICommand PasswordChanged
+        private void PasswordChanged(PasswordBox passwordBox)
         {
-            get
-            {
-                return new RelayCommand<PasswordBox>(passwordBox =>
-                {
-                    Password = passwordBox.Password;
-                });
-            }
+            Password = passwordBox.Password;
         }
     }
 }

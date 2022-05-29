@@ -5,61 +5,19 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using AccountManager.Model;
+using AccountManager.Models;
 using AccountManager.ViewModels.Popup;
 using AccountManager.Views.Popup;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.Toolkit.Mvvm.Input;
 using ModernWpf.Controls;
+using Prism.Commands;
+using Prism.Ioc;
+using Prism.Mvvm;
 
 namespace AccountManager.ViewModels
 {
-    public class MainWindowViewModel : ObservableRecipient
+    public class MainWindowViewModel : BindableBase
     {
-        public ICommand LoadedCommand
-        {
-            get
-            {
-                return new AsyncRelayCommand(async () =>
-                {
-                    try
-                    {
-                        await SetPassword();
-                    }
-                    catch (Exception)
-                    {
-                        // ignored
-                    }
-                });
-            }
-        }
-
-        private async Task SetPassword()
-        {
-            var popup = new PasswordAskDialog();
-            if (await popup.ShowAsync(ContentDialogPlacement.Popup) == ContentDialogResult.Primary)
-            {
-                if (popup.DataContext is PasswordAskDialogViewModel viewModel)
-                {
-                    AppSetting.Instance.Password = viewModel.Password;
-                    try
-                    {
-                        AppSetting.Instance.Load();
-                        Accounts = new ObservableCollection<Account>(AppSetting.Instance.Accounts);
-                    }
-                    catch (Exception)
-                    {
-                        await SetPassword();
-                    }
-                }
-            }
-        }
-
-        private void SaveAccount()
-        {
-            AppSetting.Instance.Accounts = Accounts.ToList();
-            AppSetting.Instance.Save();
-        }
+        private readonly IContainerExtension _container;
 
         private ObservableCollection<Account> _accounts = new ObservableCollection<Account>();
         public ObservableCollection<Account> Accounts
@@ -75,108 +33,153 @@ namespace AccountManager.ViewModels
             set => SetProperty(ref _selectedAccounts, value);
         }
 
-        public ICommand AccountSelectionChanged
-        {
-            get
-            {
-                return new RelayCommand<SelectionChangedEventArgs>(args =>
-                {
-                    foreach (Account item in args.AddedItems)
-                    {
-                        SelectedAccounts.Add(item);
-                    }
+        public DelegateCommand LoadedCommand { get; }
+        public DelegateCommand<SelectionChangedEventArgs> AccountSelectionChangedCommand { get; }
+        public DelegateCommand DeleteAccountCommand { get; }
+        public DelegateCommand AddAccountCommand { get; }
+        public DelegateCommand ChangeAccountCommand { get; }
+        public DelegateCommand CopyIdCommand { get; }
+        public DelegateCommand CopyPasswordCommand { get; }
 
-                    foreach (Account item in args.RemovedItems)
-                    {
-                        SelectedAccounts.Remove(item);
-                    }
-                    OnPropertyChanged(nameof(ChangeAccount));
-                    OnPropertyChanged(nameof(DeleteAccount));
-                    OnPropertyChanged(nameof(CopyIdCommand));
-                    OnPropertyChanged(nameof(CopyPasswordCommand));
-                });
+        public MainWindowViewModel(IContainerExtension container)
+        {
+            _container = container;
+
+            LoadedCommand = new DelegateCommand(Loaded);
+            AccountSelectionChangedCommand = new DelegateCommand<SelectionChangedEventArgs>(AccountSelectionChanged);
+            DeleteAccountCommand = new DelegateCommand(DeleteAccount, CanDeleteAccount);
+            AddAccountCommand = new DelegateCommand(AddAccount);
+            ChangeAccountCommand = new DelegateCommand(ChangedAccount, CanChangeAccount);
+            CopyIdCommand = new DelegateCommand(CopyId, CanCopyId);
+            CopyPasswordCommand = new DelegateCommand(CopyPassword, CanCopyPassword);
+
+            SelectedAccounts.CollectionChanged += (sender, args) =>
+            {
+                ChangeAccountCommand.RaiseCanExecuteChanged();
+                DeleteAccountCommand.RaiseCanExecuteChanged();
+                CopyIdCommand.RaiseCanExecuteChanged();
+                CopyPasswordCommand.RaiseCanExecuteChanged();
+            };
+        }
+
+        private async void Loaded()
+        {
+            try
+            {
+                await SetPassword();
+            }
+            catch (Exception)
+            {
+                // ignored
             }
         }
 
-        public ICommand ChangeAccount
+        private async Task SetPassword()
         {
-            get
+            var popup = _container.Resolve<PasswordAskDialog>();
+            if (await popup.ShowAsync(ContentDialogPlacement.Popup) != ContentDialogResult.Primary)
+                return;
+
+            if (!(popup.DataContext is PasswordAskDialogViewModel viewModel))
+                return;
+
+            try
             {
-                return new AsyncRelayCommand(async () =>
-                {
-                    var selectedAccount = SelectedAccounts.First();
-                    var viewModel = selectedAccount.Clone();
-                    var dialog = new AccountView
-                    {
-                        DataContext = viewModel
-                    };
-                    if (await dialog.ShowAsync(ContentDialogPlacement.InPlace) == ContentDialogResult.Primary)
-                    {
-                        selectedAccount.CopyFrom(viewModel);
-                    }
-                    SaveAccount();
-                }, () => SelectedAccounts.Count == 1);
+                AppSetting.Instance.Password = viewModel.Password;
+                AppSetting.Instance.Load();
+                Accounts = new ObservableCollection<Account>(AppSetting.Instance.Accounts);
+            }
+            catch (Exception)
+            {
+                await SetPassword();
             }
         }
 
-        public ICommand DeleteAccount
+        private void SaveAccount()
         {
-            get
+            AppSetting.Instance.Accounts = Accounts.ToList();
+            AppSetting.Instance.Save();
+        }
+
+        private void AccountSelectionChanged(SelectionChangedEventArgs args)
+        {
+            foreach (Account item in args.AddedItems)
             {
-                return new AsyncRelayCommand(async () =>
-                {
-                    if (await new DeleteAskDialog().ShowAsync() == ContentDialogResult.Primary)
-                    {
-                        foreach (var account in SelectedAccounts.ToArray())
-                        {
-                            Accounts.Remove(account);
-                        }
-                    }
-                    SaveAccount();
-                }, () => SelectedAccounts.Any());
+                SelectedAccounts.Add(item);
+            }
+
+            foreach (Account item in args.RemovedItems)
+            {
+                SelectedAccounts.Remove(item);
             }
         }
 
-        public ICommand AddAccount
+        private async void ChangedAccount()
         {
-            get
+            var dialog = _container.Resolve<AccountView>();
+            dialog.DataContext = SelectedAccounts.First().Clone();
+
+            if (await dialog.ShowAsync(ContentDialogPlacement.InPlace) == ContentDialogResult.Primary)
             {
-                return new AsyncRelayCommand(async () =>
-                {
-                    var viewModel = new Account();
-                    var dialog = new AccountView
-                    {
-                        DataContext = viewModel
-                    };
-                    if (await dialog.ShowAsync(ContentDialogPlacement.InPlace) == ContentDialogResult.Primary)
-                    {
-                        Accounts.Add(viewModel);
-                    }
-                    SaveAccount();
-                });
+                SelectedAccounts.First().CopyFrom(dialog.DataContext as Account);
             }
+
+            SaveAccount();
         }
 
-        public ICommand CopyIdCommand
+        private bool CanChangeAccount()
         {
-            get
-            {
-                return new RelayCommand(() =>
-                {
-                    Clipboard.SetText(SelectedAccounts.First().Id);
-                }, () => SelectedAccounts.Count == 1);
-            }
+            return SelectedAccounts.Count == 1;
         }
 
-        public ICommand CopyPasswordCommand
+        private async void DeleteAccount()
         {
-            get
+            if (await _container.Resolve<DeleteAskDialog>().ShowAsync() != ContentDialogResult.Primary)
+                return;
+
+            foreach (var account in SelectedAccounts.ToArray())
             {
-                return new RelayCommand(() =>
-                {
-                    Clipboard.SetText(SelectedAccounts.First().Password);
-                }, () => SelectedAccounts.Count == 1);
+                Accounts.Remove(account);
             }
+
+            SaveAccount();
+        }
+
+        private bool CanDeleteAccount()
+        {
+            return SelectedAccounts.Any();
+        }
+
+        private async void AddAccount()
+        {
+            var dialog = _container.Resolve<AccountView>();
+            dialog.DataContext = new Account();
+            if (await dialog.ShowAsync(ContentDialogPlacement.InPlace) == ContentDialogResult.Primary)
+            {
+                Accounts.Add(dialog.DataContext as Account);
+            }
+
+            SaveAccount();
+        }
+
+        private void CopyId()
+        {
+            Clipboard.SetText(SelectedAccounts.First().Id);
+        }
+
+        public bool CanCopyId()
+        {
+            return SelectedAccounts.Count == 1;
+        }
+
+        private void CopyPassword()
+        {
+            Clipboard.SetText(SelectedAccounts.First().Password);
+        }
+
+        private bool CanCopyPassword()
+        {
+            return SelectedAccounts.Count == 1;
         }
     }
 }
