@@ -1,6 +1,6 @@
 ﻿using ModernWpf.Controls;
 
-namespace AccountManager.View
+namespace AccountManager.Views.Popup
 {
     /// <summary>
     /// AccountView.xaml에 대한 상호 작용 논리

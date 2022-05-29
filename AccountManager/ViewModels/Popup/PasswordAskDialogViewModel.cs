@@ -3,7 +3,7 @@ using System.Windows.Input;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 
-namespace AccountManager.ViewModel.Popup
+namespace AccountManager.ViewModels.Popup
 {
     public class PasswordAskDialogViewModel : ObservableRecipient
     {

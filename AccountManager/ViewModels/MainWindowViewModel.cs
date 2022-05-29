@@ -1,18 +1,18 @@
-﻿using AccountManager.Model;
-using AccountManager.View;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.Toolkit.Mvvm.Input;
-using ModernWpf.Controls;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using AccountManager.ViewModel.Popup;
+using AccountManager.Model;
+using AccountManager.ViewModels.Popup;
+using AccountManager.Views.Popup;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
+using ModernWpf.Controls;
 
-namespace AccountManager.ViewModel
+namespace AccountManager.ViewModels
 {
     public class MainWindowViewModel : ObservableRecipient
     {

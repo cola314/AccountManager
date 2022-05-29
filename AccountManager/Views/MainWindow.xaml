@@ -1,19 +1,18 @@
-﻿<Window x:Class="AccountManager.MainWindow"
+﻿<Window x:Class="AccountManager.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:behaviours="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm="clr-namespace:AccountManager.ViewModel"
+        xmlns:vm="clr-namespace:AccountManager.ViewModels"
         xmlns:prop="clr-namespace:AccountManager.Properties"
         xmlns:local="clr-namespace:AccountManager"
+        xmlns:prism="http://prismlibrary.com/"
         mc:Ignorable="d"
         Title="AccountManager" Height="600" Width="1100"
         xmlns:ui="http://schemas.modernwpf.com/2019"
-        ui:WindowHelper.UseModernWindowStyle="True">
-    <Window.DataContext>
-        <vm:MainWindowViewModel/>
-    </Window.DataContext>
+        ui:WindowHelper.UseModernWindowStyle="True"
+        prism:ViewModelLocator.AutoWireViewModel="True">
     <behaviours:Interaction.Triggers>
         <behaviours:EventTrigger EventName="Loaded">
             <behaviours:InvokeCommandAction Command="{Binding LoadedCommand}"/>

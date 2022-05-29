@@ -59,27 +59,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\Account.cs" />
-    <Compile Include="Model\AppSetting.cs" />
+    <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\AppSetting.cs" />
     <Compile Include="Properties\Resources.ko-KR.Designer.cs">
       <DependentUpon>Resources.ko-KR.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Util\AesTool.cs" />
-    <Compile Include="Util\ShaTool.cs" />
-    <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Compile Include="ViewModel\Popup\PasswordAskDialogViewModel.cs" />
-    <Compile Include="View\Popup\AccountView.xaml.cs">
+    <Compile Include="Utils\AesTool.cs" />
+    <Compile Include="Utils\ShaTool.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\Popup\PasswordAskDialogViewModel.cs" />
+    <Compile Include="Views\Popup\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Popup\PasswordAskDialog.xaml.cs">
+    <Compile Include="Views\Popup\PasswordAskDialog.xaml.cs">
       <DependentUpon>PasswordAskDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Popup\DeleteAskDialog.xaml.cs">
+    <Compile Include="Views\Popup\DeleteAskDialog.xaml.cs">
       <DependentUpon>DeleteAskDialog.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -87,7 +87,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -96,15 +96,15 @@
       <SubType>Designer</SubType>
       <ContainsDesignTimeResources>true</ContainsDesignTimeResources>
     </Page>
-    <Page Include="View\Popup\AccountView.xaml">
+    <Page Include="Views\Popup\AccountView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Popup\PasswordAskDialog.xaml">
+    <Page Include="Views\Popup\PasswordAskDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Popup\DeleteAskDialog.xaml">
+    <Page Include="Views\Popup\DeleteAskDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,9 +152,10 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
     </PackageReference>
+    <PackageReference Include="Prism.DryIoc">
+      <Version>8.1.97</Version>
+    </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resource\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
