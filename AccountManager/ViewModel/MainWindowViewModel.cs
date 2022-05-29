@@ -5,10 +5,14 @@ using Microsoft.Toolkit.Mvvm.Input;
 using ModernWpf.Controls;
 using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Markup;
 using AccountManager.ViewModel.Popup;
 
 namespace AccountManager.ViewModel
@@ -68,6 +72,7 @@ namespace AccountManager.ViewModel
         }
 
         private ObservableCollection<Account> _selectedAccounts = new ObservableCollection<Account>();
+
         public ObservableCollection<Account> SelectedAccounts
         {
             get => _selectedAccounts;
@@ -151,6 +156,25 @@ namespace AccountManager.ViewModel
                     }
                     SaveAccount();
                 });
+            }
+        }
+
+        public ObservableCollection<CultureInfo> LanguageSource { get; } =
+            new ObservableCollection<CultureInfo>()
+            {
+                CultureInfo.GetCultureInfo("en-US"),
+                CultureInfo.GetCultureInfo("ko-KR")
+            };
+
+        public CultureInfo SelectedCultureInfo
+        {
+            get => CultureInfo.CurrentCulture.Equals(CultureInfo.GetCultureInfo("ko-KR")) ? LanguageSource[1] : LanguageSource[0];
+            set
+            {
+                Thread.CurrentThread.CurrentCulture = value;
+                Thread.CurrentThread.CurrentUICulture = value;
+                FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
+                OnPropertyChanged(nameof(SelectedCultureInfo));
             }
         }
     }

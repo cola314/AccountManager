@@ -133,6 +133,15 @@ namespace AccountManager.Properties {
         }
         
         /// <summary>
+        ///   English과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ENGLISH {
+            get {
+                return ResourceManager.GetString("ENGLISH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Enter Password과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ENTER_PASSWORD_MSG {
@@ -147,6 +156,24 @@ namespace AccountManager.Properties {
         public static string ID {
             get {
                 return ResourceManager.GetString("ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Korean과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string KOREAN {
+            get {
+                return ResourceManager.GetString("KOREAN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Language과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string LANGUAGE {
+            get {
+                return ResourceManager.GetString("LANGUAGE", resourceCulture);
             }
         }
         

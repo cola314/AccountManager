@@ -141,11 +141,20 @@
   <data name="DESCRIPTION" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="ENGLISH" xml:space="preserve">
+    <value>English</value>
+  </data>
   <data name="ENTER_PASSWORD_MSG" xml:space="preserve">
     <value>Enter Password</value>
   </data>
   <data name="ID" xml:space="preserve">
     <value>ID</value>
+  </data>
+  <data name="KOREAN" xml:space="preserve">
+    <value>Korean</value>
+  </data>
+  <data name="LANGUAGE" xml:space="preserve">
+    <value>Language</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
