@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using AccountManager.Util;
+using AccountManager.Utils;
 using Newtonsoft.Json;
 
 namespace AccountManager.Models

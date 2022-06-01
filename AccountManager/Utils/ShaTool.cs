@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace AccountManager.Util
+namespace AccountManager.Utils
 {
     public static class ShaTool
     {

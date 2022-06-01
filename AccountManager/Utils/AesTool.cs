@@ -3,7 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace AccountManager.Util
+namespace AccountManager.Utils
 {
     internal static class AesTool
     {

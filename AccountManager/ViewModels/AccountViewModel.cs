@@ -8,7 +8,6 @@ using AccountManager.Models;
 using AccountManager.Views.Popup;
 using ModernWpf.Controls;
 using Prism.Ioc;
-using Prism.Regions;
 
 namespace AccountManager.ViewModels
 {
@@ -80,7 +79,7 @@ namespace AccountManager.ViewModels
 
         private async void ChangedAccount()
         {
-            var dialog = _container.Resolve<AccountView>();
+            var dialog = _container.Resolve<AccountDialog>();
             dialog.DataContext = SelectedAccounts.First().Clone();
 
             if (await dialog.ShowAsync(ContentDialogPlacement.InPlace) == ContentDialogResult.Primary)
@@ -116,7 +115,7 @@ namespace AccountManager.ViewModels
 
         private async void AddAccount()
         {
-            var dialog = _container.Resolve<AccountView>();
+            var dialog = _container.Resolve<AccountDialog>();
             dialog.DataContext = new Account();
             if (await dialog.ShowAsync(ContentDialogPlacement.InPlace) == ContentDialogResult.Primary)
             {

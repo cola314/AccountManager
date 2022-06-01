@@ -75,8 +75,8 @@
     <Compile Include="Views\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Popup\AccountView.xaml.cs">
-      <DependentUpon>AccountView.xaml</DependentUpon>
+    <Compile Include="Views\Popup\AccountDialog.xaml.cs">
+      <DependentUpon>AccountDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Popup\PasswordAskDialog.xaml.cs">
       <DependentUpon>PasswordAskDialog.xaml</DependentUpon>
@@ -105,7 +105,7 @@
       <SubType>Designer</SubType>
       <ContainsDesignTimeResources>true</ContainsDesignTimeResources>
     </Page>
-    <Page Include="Views\Popup\AccountView.xaml">
+    <Page Include="Views\Popup\AccountDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

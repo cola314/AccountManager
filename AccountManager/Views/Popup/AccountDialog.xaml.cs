@@ -3,11 +3,11 @@
 namespace AccountManager.Views.Popup
 {
     /// <summary>
-    /// AccountView.xaml에 대한 상호 작용 논리
+    /// AccountDialog.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class AccountView : ContentDialog
+    public partial class AccountDialog : ContentDialog
     {
-        public AccountView()
+        public AccountDialog()
         {
             InitializeComponent();
         }

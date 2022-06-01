@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 using AccountManager.Models;
 using AccountManager.ViewModels.Popup;
+using AccountManager.Views;
 using AccountManager.Views.Popup;
 using ModernWpf.Controls;
 using Prism.Commands;
@@ -51,12 +47,9 @@ namespace AccountManager.ViewModels
             if (await popup.ShowAsync(ContentDialogPlacement.Popup) != ContentDialogResult.Primary)
                 return;
 
-            if (!(popup.DataContext is PasswordAskDialogViewModel viewModel))
-                return;
-
             try
             {
-                AppSetting.Instance.Password = viewModel.Password;
+                AppSetting.Instance.Password = popup.ViewModel.Password;
                 AppSetting.Instance.Load();
             }
             catch (Exception)
