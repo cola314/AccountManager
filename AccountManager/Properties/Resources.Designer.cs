@@ -70,6 +70,15 @@ namespace AccountManager.Properties {
         }
         
         /// <summary>
+        ///   Backup Accounts과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ACCOUNT_BACKUP {
+            get {
+                return ResourceManager.GetString("ACCOUNT_BACKUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Add New Account과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ADD_NEW_ACCOUNT {
@@ -160,11 +169,29 @@ namespace AccountManager.Properties {
         }
         
         /// <summary>
+        ///   Export Accounts과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string EXPORT_ACCOUNTS {
+            get {
+                return ResourceManager.GetString("EXPORT_ACCOUNTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   ID과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ID {
             get {
                 return ResourceManager.GetString("ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Import Accounts과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string IMPORT_ACCOUNTS {
+            get {
+                return ResourceManager.GetString("IMPORT_ACCOUNTS", resourceCulture);
             }
         }
         
@@ -183,6 +210,15 @@ namespace AccountManager.Properties {
         public static string PASSWORD {
             get {
                 return ResourceManager.GetString("PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Settings과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string SETTINGS {
+            get {
+                return ResourceManager.GetString("SETTINGS", resourceCulture);
             }
         }
         

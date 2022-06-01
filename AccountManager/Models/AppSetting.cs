@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace AccountManager.Models
 {
-    internal class AppSetting
+    public class AppSetting
     {
         private static readonly string SETTING_FOLDER = Path.GetDirectoryName(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath);
         private static readonly string SETTING_FILE = Path.Combine(SETTING_FOLDER, "setting.json");

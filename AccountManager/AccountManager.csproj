@@ -60,6 +60,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\AccountRepository.cs" />
     <Compile Include="Models\AppSetting.cs" />
     <Compile Include="Properties\Resources.ko-KR.Designer.cs">
       <DependentUpon>Resources.ko-KR.resx</DependentUpon>
@@ -72,6 +73,7 @@
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\Popup\PasswordAskDialogViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Views\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>
@@ -83,6 +85,9 @@
     </Compile>
     <Compile Include="Views\Popup\DeleteAskDialog.xaml.cs">
       <DependentUpon>DeleteAskDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\AccountView.xaml">
       <SubType>Designer</SubType>
@@ -114,6 +119,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Popup\DeleteAskDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,6 +168,8 @@
       <Version>8.1.97</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="NewFolder1\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

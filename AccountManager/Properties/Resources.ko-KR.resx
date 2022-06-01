@@ -120,6 +120,9 @@
   <data name="ACCOUNT" xml:space="preserve">
     <value>계정</value>
   </data>
+  <data name="ACCOUNT_BACKUP" xml:space="preserve">
+    <value>계정 백업</value>
+  </data>
   <data name="ADD_NEW_ACCOUNT" xml:space="preserve">
     <value>계정 추가</value>
   </data>
@@ -150,14 +153,23 @@
   <data name="ENTER_PASSWORD_MSG" xml:space="preserve">
     <value>비밀번호를 입력하세요</value>
   </data>
+  <data name="EXPORT_ACCOUNTS" xml:space="preserve">
+    <value>계정 내보내기</value>
+  </data>
   <data name="ID" xml:space="preserve">
     <value>아이디</value>
+  </data>
+  <data name="IMPORT_ACCOUNTS" xml:space="preserve">
+    <value>계정 불러오기</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>확인</value>
   </data>
   <data name="PASSWORD" xml:space="preserve">
     <value>비밀번호</value>
+  </data>
+  <data name="SETTINGS" xml:space="preserve">
+    <value>설정</value>
   </data>
   <data name="SITE" xml:space="preserve">
     <value>사이트</value>

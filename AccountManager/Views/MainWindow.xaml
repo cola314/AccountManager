@@ -21,13 +21,18 @@
             <behaviours:InvokeCommandAction Command="{Binding LoadedCommand}" />
         </behaviours:EventTrigger>
     </behaviours:Interaction.Triggers>
-    <ui:NavigationView IsSettingsVisible="False">
+    <ui:NavigationView>
+        <behaviours:Interaction.Triggers>
+            <behaviours:EventTrigger EventName="SelectionChanged">
+                <behaviours:InvokeCommandAction Command="{Binding SelectedMenuItemChangedCommand}" PassEventArgsToCommand="True" />
+            </behaviours:EventTrigger>
+        </behaviours:Interaction.Triggers>
         <ui:NavigationView.MenuItems>
             <ui:NavigationViewItem
                 Content="{x:Static prop:Resources.ACCOUNT}"
                 Icon="Library"
                 IsSelected="True" />
         </ui:NavigationView.MenuItems>
-        <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.MainRegion}" />
+        <ContentControl Margin="20" prism:RegionManager.RegionName="{x:Static local:RegionNames.MainRegion}" />
     </ui:NavigationView>
 </Window>
