@@ -8,10 +8,11 @@ using AccountManager.Models;
 using AccountManager.Views.Popup;
 using ModernWpf.Controls;
 using Prism.Ioc;
+using Prism.Regions;
 
 namespace AccountManager.ViewModels
 {
-    public class AccountViewModel : BindableBase
+    public class AccountViewModel : BindableBase, INavigationAware
     {
         private readonly IContainerExtension _container;
 
@@ -143,6 +144,20 @@ namespace AccountManager.ViewModels
         private bool CanCopyPassword()
         {
             return SelectedAccounts.Count == 1;
+        }
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            Accounts = new ObservableCollection<Account>(AppSetting.Instance.Accounts);
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
         }
     }
 }

@@ -68,7 +68,7 @@ namespace AccountManager.ViewModels
             {
                 _regionManager.RequestNavigate(RegionNames.MainRegion, nameof(SettingsView));
             }
-            else if (o.SelectedItemContainer.Content == Resources.ACCOUNT)
+            else if (o.SelectedItemContainer.Content as string == Resources.ACCOUNT)
             {
                 _regionManager.RequestNavigate(RegionNames.MainRegion, nameof(AccountView));
             }

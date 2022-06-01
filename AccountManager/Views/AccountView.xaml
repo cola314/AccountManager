@@ -7,7 +7,7 @@
     xmlns:prop="clr-namespace:AccountManager.Properties"
     xmlns:ui="http://schemas.modernwpf.com/2019"
     prism:ViewModelLocator.AutoWireViewModel="True">
-    <Grid Margin="20">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />

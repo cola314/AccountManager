@@ -33,6 +33,6 @@
                 Icon="Library"
                 IsSelected="True" />
         </ui:NavigationView.MenuItems>
-        <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.MainRegion}" />
+        <ContentControl Margin="20" prism:RegionManager.RegionName="{x:Static local:RegionNames.MainRegion}" />
     </ui:NavigationView>
 </Window>

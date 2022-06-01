@@ -60,6 +60,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\AccountRepository.cs" />
     <Compile Include="Models\AppSetting.cs" />
     <Compile Include="Properties\Resources.ko-KR.Designer.cs">
       <DependentUpon>Resources.ko-KR.resx</DependentUpon>
