@@ -12,6 +12,7 @@ namespace AccountManager
     {
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterForNavigation<AccountView>();
         }
 
         protected override Window CreateShell()

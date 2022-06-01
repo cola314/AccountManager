@@ -1,0 +1,90 @@
+﻿<UserControl
+    x:Class="AccountManager.Views.AccountView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:prop="clr-namespace:AccountManager.Properties"
+    xmlns:ui="http://schemas.modernwpf.com/2019"
+    prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--
+            <DockPanel LastChildFill="False">
+                <ui:SimpleStackPanel Orientation="Horizontal" Spacing="10" DockPanel.Dock="Right">
+                    <ComboBox DockPanel.Dock="Left" Width="150">
+                        <ComboBoxItem Content="Site" IsSelected="True"/>
+                        <ComboBoxItem Content="ID"/>
+                        <ComboBoxItem Content="Description"/>
+                    </ComboBox>
+                    <ui:AutoSuggestBox DockPanel.Dock="Right" Width="450"/>
+                </ui:SimpleStackPanel>
+            </DockPanel>
+        -->
+
+        <ListView
+            Grid.Row="1"
+            Margin="0,20,0,20"
+            ItemsSource="{Binding Accounts}">
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="SelectionChanged">
+                    <b:InvokeCommandAction Command="{Binding AccountSelectionChangedCommand}" PassEventArgsToCommand="True" />
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="{Binding CopyIdCommand}" Header="{x:Static prop:Resources.COPY_ID}">
+                        <MenuItem.Icon>
+                            <ui:SymbolIcon Symbol="Copy" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Command="{Binding CopyPasswordCommand}" Header="{x:Static prop:Resources.COPY_PASSWORD}">
+                        <MenuItem.Icon>
+                            <ui:SymbolIcon Symbol="Copy" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn
+                        Width="200"
+                        DisplayMemberBinding="{Binding Site}"
+                        Header="{x:Static prop:Resources.SITE}" />
+                    <GridViewColumn
+                        Width="200"
+                        DisplayMemberBinding="{Binding Id}"
+                        Header="{x:Static prop:Resources.ID}" />
+                    <GridViewColumn
+                        Width="200"
+                        DisplayMemberBinding="{Binding Password}"
+                        Header="{x:Static prop:Resources.PASSWORD}" />
+                    <GridViewColumn
+                        Width="350"
+                        DisplayMemberBinding="{Binding Description}"
+                        Header="{x:Static prop:Resources.DESCRIPTION}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <DockPanel Grid.Row="2" LastChildFill="False">
+            <ui:SimpleStackPanel
+                DockPanel.Dock="Right"
+                Orientation="Horizontal"
+                Spacing="10">
+                <Button Command="{Binding ChangeAccountCommand}" Content="{x:Static prop:Resources.CHANGE_ACCOUNT_DETAILS}" />
+                <Button Command="{Binding DeleteAccountCommand}" Content="{x:Static prop:Resources.DELETE_ACCOUNT}" />
+                <Button
+                    Command="{Binding AddAccountCommand}"
+                    Content="{x:Static prop:Resources.ADD_NEW_ACCOUNT}"
+                    Style="{StaticResource AccentButtonStyle}" />
+            </ui:SimpleStackPanel>
+        </DockPanel>
+
+    </Grid>
+</UserControl>
