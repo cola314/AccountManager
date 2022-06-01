@@ -21,7 +21,12 @@
             <behaviours:InvokeCommandAction Command="{Binding LoadedCommand}" />
         </behaviours:EventTrigger>
     </behaviours:Interaction.Triggers>
-    <ui:NavigationView IsSettingsVisible="False">
+    <ui:NavigationView>
+        <behaviours:Interaction.Triggers>
+            <behaviours:EventTrigger EventName="SelectionChanged">
+                <behaviours:InvokeCommandAction Command="{Binding SelectedMenuItemChangedCommand}" PassEventArgsToCommand="True" />
+            </behaviours:EventTrigger>
+        </behaviours:Interaction.Triggers>
         <ui:NavigationView.MenuItems>
             <ui:NavigationViewItem
                 Content="{x:Static prop:Resources.ACCOUNT}"

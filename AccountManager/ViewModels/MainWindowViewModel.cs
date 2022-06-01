@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using AccountManager.Models;
+using AccountManager.Properties;
 using AccountManager.ViewModels.Popup;
 using AccountManager.Views;
 using AccountManager.Views.Popup;
@@ -18,6 +20,7 @@ namespace AccountManager.ViewModels
         private readonly IRegionManager _regionManager;
 
         public DelegateCommand LoadedCommand { get; }
+        public DelegateCommand<NavigationViewSelectionChangedEventArgs> SelectedMenuItemChangedCommand { get; }
 
         public MainWindowViewModel(IContainerExtension container, IRegionManager regionManager)
         {
@@ -25,6 +28,7 @@ namespace AccountManager.ViewModels
             _regionManager = regionManager;
 
             LoadedCommand = new DelegateCommand(Loaded);
+            SelectedMenuItemChangedCommand = new DelegateCommand<NavigationViewSelectionChangedEventArgs>(OnSelectedMenuItemChanged);
         }
 
         private async void Loaded()
@@ -55,6 +59,18 @@ namespace AccountManager.ViewModels
             catch (Exception)
             {
                 await SetPassword();
+            }
+        }
+
+        private void OnSelectedMenuItemChanged(NavigationViewSelectionChangedEventArgs o)
+        {
+            if (o.IsSettingsSelected)
+            {
+                _regionManager.RequestNavigate(RegionNames.MainRegion, nameof(SettingsView));
+            }
+            else if (o.SelectedItemContainer.Content == Resources.ACCOUNT)
+            {
+                _regionManager.RequestNavigate(RegionNames.MainRegion, nameof(AccountView));
             }
         }
     }

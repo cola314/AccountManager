@@ -187,6 +187,15 @@ namespace AccountManager.Properties {
         }
         
         /// <summary>
+        ///   Settings과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string SETTINGS {
+            get {
+                return ResourceManager.GetString("SETTINGS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Site과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string SITE {

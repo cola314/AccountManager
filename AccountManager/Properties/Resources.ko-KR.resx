@@ -159,6 +159,9 @@
   <data name="PASSWORD" xml:space="preserve">
     <value>비밀번호</value>
   </data>
+  <data name="SETTINGS" xml:space="preserve">
+    <value>설정</value>
+  </data>
   <data name="SITE" xml:space="preserve">
     <value>사이트</value>
   </data>

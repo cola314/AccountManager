@@ -159,6 +159,9 @@
   <data name="PASSWORD" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="SETTINGS" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="SITE" xml:space="preserve">
     <value>Site</value>
   </data>
