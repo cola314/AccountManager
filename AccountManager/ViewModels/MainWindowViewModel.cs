@@ -6,6 +6,7 @@ using AccountManager.Properties;
 using AccountManager.ViewModels.Popup;
 using AccountManager.Views;
 using AccountManager.Views.Popup;
+using Microsoft.Extensions.Logging;
 using ModernWpf.Controls;
 using Prism.Commands;
 using Prism.Ioc;
@@ -16,16 +17,18 @@ namespace AccountManager.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
+        private readonly ILogger<MainWindowViewModel> _logger;
         private readonly IContainerExtension _container;
         private readonly IRegionManager _regionManager;
 
         public DelegateCommand LoadedCommand { get; }
         public DelegateCommand<NavigationViewSelectionChangedEventArgs> SelectedMenuItemChangedCommand { get; }
 
-        public MainWindowViewModel(IContainerExtension container, IRegionManager regionManager)
+        public MainWindowViewModel(IContainerExtension container, IRegionManager regionManager, ILogger<MainWindowViewModel> logger)
         {
             _container = container;
             _regionManager = regionManager;
+            _logger = logger;
 
             LoadedCommand = new DelegateCommand(Loaded);
             SelectedMenuItemChangedCommand = new DelegateCommand<NavigationViewSelectionChangedEventArgs>(OnSelectedMenuItemChanged);
@@ -35,6 +38,7 @@ namespace AccountManager.ViewModels
         {
             try
             {
+                _logger.LogInformation("Load Settings");
                 await SetPassword();
 
                 _regionManager.RequestNavigate(RegionNames.MainRegion, nameof(AccountView));
