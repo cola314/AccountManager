@@ -15,6 +15,7 @@ namespace AccountManager.ViewModels
     public class AccountViewModel : BindableBase, INavigationAware
     {
         private readonly IContainerExtension _container;
+        private readonly AppSetting _appSetting;
 
         private ObservableCollection<Account> _accounts = new ObservableCollection<Account>();
         public ObservableCollection<Account> Accounts
@@ -37,9 +38,10 @@ namespace AccountManager.ViewModels
         public DelegateCommand CopyIdCommand { get; }
         public DelegateCommand CopyPasswordCommand { get; }
 
-        public AccountViewModel(IContainerExtension container)
+        public AccountViewModel(IContainerExtension container, AppSetting appSetting)
         {
             _container = container;
+            _appSetting = appSetting;
 
             AccountSelectionChangedCommand = new DelegateCommand<SelectionChangedEventArgs>(AccountSelectionChanged);
             DeleteAccountCommand = new DelegateCommand(DeleteAccount, CanDeleteAccount);
@@ -56,13 +58,13 @@ namespace AccountManager.ViewModels
                 CopyPasswordCommand.RaiseCanExecuteChanged();
             };
 
-            Accounts = new ObservableCollection<Account>(AppSetting.Instance.Accounts);
+            Accounts = new ObservableCollection<Account>(_appSetting.Accounts);
         }
 
         private void SaveAccount()
         {
-            AppSetting.Instance.Accounts = Accounts.ToList();
-            AppSetting.Instance.Save();
+            _appSetting.Accounts = Accounts.ToList();
+            _appSetting.Save();
         }
 
         private void AccountSelectionChanged(SelectionChangedEventArgs args)
@@ -148,7 +150,7 @@ namespace AccountManager.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            Accounts = new ObservableCollection<Account>(AppSetting.Instance.Accounts);
+            Accounts = new ObservableCollection<Account>(_appSetting.Accounts);
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

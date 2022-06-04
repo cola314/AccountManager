@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using AccountManager.Models;
 using AccountManager.Utils.Logging;
 using AccountManager.Views;
 using DryIoc;
@@ -20,6 +21,8 @@ namespace AccountManager
         {
             containerRegistry.RegisterForNavigation<AccountView>();
             containerRegistry.RegisterForNavigation<SettingsView>();
+
+            containerRegistry.RegisterSingleton<AppSetting>();
         }
 
         protected override Window CreateShell()

@@ -13,14 +13,13 @@ namespace AccountManager.Utils.Logging
     {
         public ApplicationLogConfiguration()
         {
-            // Targets where to log to: File and Console
+            string logFileName = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
             var logFolder = Path.GetDirectoryName(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath);
-            var logfile = new NLog.Targets.FileTarget("logfile") { FileName = logFolder + "/Logs/${longdate}.log" };
-            var logconsole = new NLog.Targets.ConsoleTarget("logconsole");
-
-            // Rules for mapping loggers to targets            
-            this.AddRule(NLog.LogLevel.Info, NLog.LogLevel.Fatal, logconsole);
-            this.AddRule(NLog.LogLevel.Debug, NLog.LogLevel.Fatal, logfile);
+            var fileLogger = new NLog.Targets.FileTarget("log-file") { FileName = $"{logFolder}/Logs/{logFileName}.log" };
+            var consoleLogger = new NLog.Targets.ConsoleTarget("log-console");
+     
+            this.AddRule(NLog.LogLevel.Info, NLog.LogLevel.Fatal, consoleLogger);
+            this.AddRule(NLog.LogLevel.Debug, NLog.LogLevel.Fatal, fileLogger);
         }
     }
 }

@@ -18,17 +18,19 @@ namespace AccountManager.ViewModels
     public class MainWindowViewModel : BindableBase
     {
         private readonly ILogger<MainWindowViewModel> _logger;
+        private readonly AppSetting _appSetting;
         private readonly IContainerExtension _container;
         private readonly IRegionManager _regionManager;
 
         public DelegateCommand LoadedCommand { get; }
         public DelegateCommand<NavigationViewSelectionChangedEventArgs> SelectedMenuItemChangedCommand { get; }
 
-        public MainWindowViewModel(IContainerExtension container, IRegionManager regionManager, ILogger<MainWindowViewModel> logger)
+        public MainWindowViewModel(IContainerExtension container, IRegionManager regionManager, ILogger<MainWindowViewModel> logger, AppSetting appSetting)
         {
             _container = container;
             _regionManager = regionManager;
             _logger = logger;
+            _appSetting = appSetting;
 
             LoadedCommand = new DelegateCommand(Loaded);
             SelectedMenuItemChangedCommand = new DelegateCommand<NavigationViewSelectionChangedEventArgs>(OnSelectedMenuItemChanged);
@@ -36,17 +38,10 @@ namespace AccountManager.ViewModels
 
         private async void Loaded()
         {
-            try
-            {
-                _logger.LogInformation("Load Settings");
-                await SetPassword();
+            _logger.LogInformation("Load Settings");
+            await SetPassword();
 
-                _regionManager.RequestNavigate(RegionNames.MainRegion, nameof(AccountView));
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
+            _regionManager.RequestNavigate(RegionNames.MainRegion, nameof(AccountView));
         }
 
         private async Task SetPassword()
@@ -57,11 +52,13 @@ namespace AccountManager.ViewModels
 
             try
             {
-                AppSetting.Instance.Password = popup.ViewModel.Password;
-                AppSetting.Instance.Load();
+                _appSetting.Password = popup.ViewModel.Password;
+                _appSetting.Load();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                //TODO Alert
+                _logger.LogError("Load failed - {0}", ex);
                 await SetPassword();
             }
         }

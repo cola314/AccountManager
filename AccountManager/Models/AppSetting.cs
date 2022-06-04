@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Runtime.CompilerServices;
 using AccountManager.Utils;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace AccountManager.Models
@@ -12,14 +14,16 @@ namespace AccountManager.Models
         private static readonly string SETTING_FOLDER = Path.GetDirectoryName(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath);
         private static readonly string SETTING_FILE = Path.Combine(SETTING_FOLDER, "setting.json");
 
-        private AppSetting()
+        private readonly ILogger<AppSetting> _logger;
+        private readonly AccountRepository _accountRepository;
+
+        public AppSetting(ILogger<AppSetting> logger, AccountRepository accountRepository)
         {
+            _logger = logger;
+            _accountRepository = accountRepository;
         }
 
-        public static AppSetting Instance { get; private set; } = new AppSetting();
-        
         private string _password;
-        [JsonIgnore]
         public string Password
         {
             get => AesTool.Decrypt(_password, "_password");
@@ -32,29 +36,23 @@ namespace AccountManager.Models
         {
             try
             {
-                string data = AesTool.Encrypt(JsonConvert.SerializeObject(AppSetting.Instance), Password);
+                _logger.LogInformation("Save settings");
 
                 if (!Directory.Exists(SETTING_FOLDER))
                 {
                     Directory.CreateDirectory(SETTING_FOLDER);
                 }
-                File.WriteAllText(SETTING_FILE, data);
+                _accountRepository.SaveToFile(SETTING_FILE, Password, Accounts);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //TODO logging
+                _logger.LogError(ex, "Failed to save settings to file");
             }
         }
 
         public void Load()
         {
-            if (!File.Exists(SETTING_FILE))
-            {
-                return;
-            }
-            string data = File.ReadAllText(SETTING_FILE);
-            Instance = JsonConvert.DeserializeObject<AppSetting>(AesTool.Decrypt(data, Password));
-            Instance.Password = Password;
+            Accounts = _accountRepository.Load(SETTING_FILE, Password);
         }
     }
 }
