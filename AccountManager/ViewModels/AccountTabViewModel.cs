@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using AccountManager.Models;
+using AccountManager.ViewModels.Common;
 using AccountManager.Views.Popup;
 using ModernWpf.Controls;
 using Prism.Ioc;
@@ -17,15 +18,15 @@ namespace AccountManager.ViewModels
         private readonly IContainerExtension _container;
         private readonly AppSetting _appSetting;
 
-        private ObservableCollection<Account> _accounts = new ObservableCollection<Account>();
-        public ObservableCollection<Account> Accounts
+        private ObservableCollection<AccountViewModel> _accounts = new ObservableCollection<AccountViewModel>();
+        public ObservableCollection<AccountViewModel> Accounts
         {
             get => _accounts;
             set => SetProperty(ref _accounts, value);
         }
 
-        private ObservableCollection<Account> _selectedAccounts = new ObservableCollection<Account>();
-        public ObservableCollection<Account> SelectedAccounts
+        private ObservableCollection<AccountViewModel> _selectedAccounts = new ObservableCollection<AccountViewModel>();
+        public ObservableCollection<AccountViewModel> SelectedAccounts
         {
             get => _selectedAccounts;
             set => SetProperty(ref _selectedAccounts, value);
@@ -58,23 +59,24 @@ namespace AccountManager.ViewModels
                 CopyPasswordCommand.RaiseCanExecuteChanged();
             };
 
-            Accounts = new ObservableCollection<Account>(_appSetting.Accounts);
+            Accounts = new ObservableCollection<AccountViewModel>(
+                _appSetting.Accounts.Select(x => new AccountViewModel(x)));
         }
 
         private void SaveAccount()
         {
-            _appSetting.Accounts = Accounts.ToList();
+            _appSetting.Accounts = Accounts.Select(x => x.ToAccount()).ToList();
             _appSetting.Save();
         }
 
         private void AccountSelectionChanged(SelectionChangedEventArgs args)
         {
-            foreach (Account item in args.AddedItems)
+            foreach (AccountViewModel item in args.AddedItems)
             {
                 SelectedAccounts.Add(item);
             }
 
-            foreach (Account item in args.RemovedItems)
+            foreach (AccountViewModel item in args.RemovedItems)
             {
                 SelectedAccounts.Remove(item);
             }
@@ -87,7 +89,7 @@ namespace AccountManager.ViewModels
 
             if (await dialog.ShowAsync(ContentDialogPlacement.InPlace) == ContentDialogResult.Primary)
             {
-                SelectedAccounts.First().CopyFrom(dialog.DataContext as Account);
+                SelectedAccounts.First().CopyFrom(dialog.DataContext as AccountViewModel);
             }
 
             SaveAccount();
@@ -119,10 +121,10 @@ namespace AccountManager.ViewModels
         private async void AddAccount()
         {
             var dialog = _container.Resolve<AccountDialog>();
-            dialog.DataContext = new Account();
+            dialog.DataContext = new AccountViewModel();
             if (await dialog.ShowAsync(ContentDialogPlacement.InPlace) == ContentDialogResult.Primary)
             {
-                Accounts.Add(dialog.DataContext as Account);
+                Accounts.Add(dialog.DataContext as AccountViewModel);
             }
 
             SaveAccount();
@@ -150,7 +152,7 @@ namespace AccountManager.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            Accounts = new ObservableCollection<Account>(_appSetting.Accounts);
+            Accounts = new ObservableCollection<AccountViewModel>(_appSetting.Accounts.Select(x => new AccountViewModel(x)));
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

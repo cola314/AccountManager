@@ -71,12 +71,13 @@
     <Compile Include="Utils\AesTool.cs" />
     <Compile Include="Utils\Logging\ApplicationLogConfiguration.cs" />
     <Compile Include="Utils\ShaTool.cs" />
-    <Compile Include="ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\AccountTabViewModel.cs" />
+    <Compile Include="ViewModels\Common\AccountViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\Popup\PasswordAskDialogViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
-    <Compile Include="Views\AccountView.xaml.cs">
-      <DependentUpon>AccountView.xaml</DependentUpon>
+    <Compile Include="Views\AccountTabView.xaml.cs">
+      <DependentUpon>AccountTabView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Popup\AccountDialog.xaml.cs">
       <DependentUpon>AccountDialog.xaml</DependentUpon>
@@ -90,7 +91,7 @@
     <Compile Include="Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\AccountView.xaml">
+    <Page Include="Views\AccountTabView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -3,11 +3,11 @@
     using System.Windows.Controls;
 
     /// <summary>
-    /// Interaction logic for AccountView
+    /// Interaction logic for AccountTabView
     /// </summary>
-    public partial class AccountView : UserControl
+    public partial class AccountTabView : UserControl
     {
-        public AccountView()
+        public AccountTabView()
         {
             InitializeComponent();
         }

@@ -29,16 +29,7 @@ namespace AccountManager.Models
                 this.Description = account.Description;
             }
 
-            public Account ToAccount()
-            {
-                return new Account()
-                {
-                    Id = Id,
-                    Site = Site,
-                    Password = Password,
-                    Description = Description
-                };
-            }
+            public Account ToAccount() => new Account(Id, Site, Password, Description);
         }
 
         private class BackupJson

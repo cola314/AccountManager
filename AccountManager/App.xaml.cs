@@ -19,7 +19,7 @@ namespace AccountManager
     {
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<AccountView>();
+            containerRegistry.RegisterForNavigation<AccountTabView>();
             containerRegistry.RegisterForNavigation<SettingsView>();
 
             containerRegistry.RegisterSingleton<AppSetting>();

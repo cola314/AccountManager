@@ -41,7 +41,7 @@ namespace AccountManager.ViewModels
             _logger.LogInformation("Load Settings");
             await SetPassword();
 
-            _regionManager.RequestNavigate(RegionNames.MainRegion, nameof(AccountView));
+            _regionManager.RequestNavigate(RegionNames.MainRegion, nameof(AccountTabView));
         }
 
         private async Task SetPassword()
@@ -71,7 +71,7 @@ namespace AccountManager.ViewModels
             }
             else if (o.SelectedItemContainer.Content as string == Resources.ACCOUNT)
             {
-                _regionManager.RequestNavigate(RegionNames.MainRegion, nameof(AccountView));
+                _regionManager.RequestNavigate(RegionNames.MainRegion, nameof(AccountTabView));
             }
         }
     }
