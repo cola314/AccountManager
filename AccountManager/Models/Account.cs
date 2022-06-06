@@ -2,7 +2,7 @@
 
 namespace AccountManager.Models
 {
-    public class Account : BindableBase
+    public class Account
     {
         public Account(string id, string site, string password, string description)
         {

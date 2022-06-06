@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using AccountManager.Models;
+using AccountManager.Utils.Extensions;
 using AccountManager.ViewModels.Common;
 using AccountManager.Views.Popup;
 using ModernWpf.Controls;
@@ -59,8 +60,7 @@ namespace AccountManager.ViewModels
                 CopyPasswordCommand.RaiseCanExecuteChanged();
             };
 
-            Accounts = new ObservableCollection<AccountViewModel>(
-                _appSetting.Accounts.Select(x => new AccountViewModel(x)));
+            Accounts = _appSetting.Accounts.ToObservableCollection(x => new AccountViewModel(x));
         }
 
         private void SaveAccount()
@@ -152,7 +152,7 @@ namespace AccountManager.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            Accounts = new ObservableCollection<AccountViewModel>(_appSetting.Accounts.Select(x => new AccountViewModel(x)));
+            Accounts = _appSetting.Accounts.ToObservableCollection(x => new AccountViewModel(x));
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

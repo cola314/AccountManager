@@ -69,6 +69,7 @@
     </Compile>
     <Compile Include="RegionNames.cs" />
     <Compile Include="Utils\AesTool.cs" />
+    <Compile Include="Utils\Extensions\ObservableCollectionExtensions.cs" />
     <Compile Include="Utils\Logging\ApplicationLogConfiguration.cs" />
     <Compile Include="Utils\ShaTool.cs" />
     <Compile Include="ViewModels\AccountTabViewModel.cs" />
