@@ -12,15 +12,18 @@ namespace AccountManager.Models
     {
         private class AccountJson
         {
-            public string Id { get; set; }
-            public string Site { get; set; }
-            public string Password { get; set; }
-            public string Description { get; set; }
+            [JsonProperty("id")]
+            private string Id { get; }
 
-            public AccountJson()
-            {
-            }
+            [JsonProperty("site")]
+            private string Site { get; }
 
+            [JsonProperty("password")]
+            private string Password { get; }
+
+            [JsonProperty("description")]
+            private string Description { get; }
+            
             public AccountJson(Account account)
             {
                 this.Id = account.Id;
@@ -34,11 +37,18 @@ namespace AccountManager.Models
 
         private class BackupJson
         {
-            public BackupJson()
+            public BackupJson(IReadOnlyList<Account> accounts)
             {
+                if (accounts == null)
+                    Accounts = Array.Empty<AccountJson>();
+                else
+                    Accounts = accounts.Select(x => new AccountJson(x)).ToList();
             }
 
-            public List<AccountJson> Accounts { get; set; } = new List<AccountJson>();
+            [JsonProperty("accounts")]
+            private IReadOnlyList<AccountJson> Accounts { get; }
+
+            public List<Account> ToAccounts() => Accounts.Select(x => x.ToAccount()).ToList();
         }
 
         /// <summary>
@@ -49,10 +59,7 @@ namespace AccountManager.Models
         /// <param name="password"></param>
         public void SaveToFile(string file, string password, List<Account> accounts)
         {
-            var backupData = new BackupJson()
-            {
-                Accounts = accounts.Select(x => new AccountJson(x)).ToList()
-            };
+            var backupData = new BackupJson(accounts);
             string encryptedData = AesTool.Encrypt(JsonConvert.SerializeObject(backupData), password);
             File.WriteAllText(file, encryptedData);
         }
@@ -61,7 +68,7 @@ namespace AccountManager.Models
         {
             string text = File.ReadAllText(file);
             var backupData = JsonConvert.DeserializeObject<BackupJson>(AesTool.Decrypt(text, password));
-            return backupData.Accounts.Select(x => x.ToAccount()).ToList();
+            return backupData.ToAccounts();
         }
     }
 }
