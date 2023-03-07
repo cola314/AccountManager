@@ -59,8 +59,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\Account.cs" />
-    <Compile Include="Models\AccountRepository.cs" />
+    <Compile Include="Configs\FileConfig.cs" />
+    <Compile Include="Models\Accounts\Account.cs" />
+    <Compile Include="Models\Accounts\AccountRepository.cs" />
     <Compile Include="Models\AppSetting.cs" />
     <Compile Include="Models\Csv\CsvExporter.cs" />
     <Compile Include="Models\Csv\CsvImporter.cs" />
@@ -73,7 +74,7 @@
     <Compile Include="Utils\AesTool.cs" />
     <Compile Include="Utils\Base64Tool.cs" />
     <Compile Include="Utils\Extensions\ObservableCollectionExtensions.cs" />
-    <Compile Include="Utils\Logging\ApplicationLogConfiguration.cs" />
+    <Compile Include="Configs\Logging\ApplicationLogConfiguration.cs" />
     <Compile Include="Utils\ShaTool.cs" />
     <Compile Include="ViewModels\AccountTabViewModel.cs" />
     <Compile Include="ViewModels\Common\AccountViewModel.cs" />

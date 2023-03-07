@@ -1,11 +1,10 @@
 ﻿using System.Windows;
+using AccountManager.Configs.Logging;
 using AccountManager.Models;
-using AccountManager.Utils.Logging;
 using AccountManager.Views;
 using DryIoc;
 using DryIoc.Microsoft.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using Prism.DryIoc;
 using Prism.Ioc;

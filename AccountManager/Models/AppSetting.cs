@@ -1,26 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
-using System.Runtime.CompilerServices;
+using AccountManager.Configs;
+using AccountManager.Models.Accounts;
 using AccountManager.Utils;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace AccountManager.Models
 {
     public class AppSetting
     {
-        private static readonly string SETTING_FOLDER = Path.GetDirectoryName(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath);
-        private static readonly string SETTING_FILE = Path.Combine(SETTING_FOLDER, "setting.json");
-
-        private readonly ILogger<AppSetting> _logger;
+        private readonly ILogger _logger;
         private readonly AccountRepository _accountRepository;
+        private readonly FileConfig _fileConfig;
 
-        public AppSetting(ILogger<AppSetting> logger, AccountRepository accountRepository)
+        public AppSetting(ILogger<AppSetting> logger, AccountRepository accountRepository, FileConfig fileConfig)
         {
             _logger = logger;
             _accountRepository = accountRepository;
+            _fileConfig = fileConfig;
         }
 
         private string _password;
@@ -38,11 +36,11 @@ namespace AccountManager.Models
             {
                 _logger.LogInformation("Save settings");
 
-                if (!Directory.Exists(SETTING_FOLDER))
+                if (!Directory.Exists(_fileConfig.SettingFolder))
                 {
-                    Directory.CreateDirectory(SETTING_FOLDER);
+                    Directory.CreateDirectory(_fileConfig.SettingFolder);
                 }
-                _accountRepository.SaveToFile(SETTING_FILE, Password, Accounts);
+                _accountRepository.SaveToFile(_fileConfig.SecretFile, Password, Accounts);
             }
             catch (Exception ex)
             {
@@ -52,7 +50,7 @@ namespace AccountManager.Models
 
         public void Load()
         {
-            Accounts = _accountRepository.Load(SETTING_FILE, Password);
+            Accounts = _accountRepository.Load(_fileConfig.SecretFile, Password);
         }
     }
 }

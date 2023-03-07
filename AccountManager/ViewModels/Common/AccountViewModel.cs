@@ -1,4 +1,5 @@
 ﻿using AccountManager.Models;
+using AccountManager.Models.Accounts;
 using Prism.Mvvm;
 
 namespace AccountManager.ViewModels.Common

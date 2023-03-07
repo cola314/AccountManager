@@ -1,12 +1,11 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using AccountManager.Utils;
 using Newtonsoft.Json;
 
-namespace AccountManager.Models
+namespace AccountManager.Models.Accounts
 {
     public class AccountRepository
     {

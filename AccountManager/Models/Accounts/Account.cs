@@ -1,6 +1,4 @@
-﻿using Prism.Mvvm;
-
-namespace AccountManager.Models
+﻿namespace AccountManager.Models.Accounts
 {
     public class Account
     {

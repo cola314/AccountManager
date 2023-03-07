@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NLog.Config;
 
-namespace AccountManager.Utils.Logging
+namespace AccountManager.Configs.Logging
 {
     public class ApplicationLogConfiguration : LoggingConfiguration
     {
