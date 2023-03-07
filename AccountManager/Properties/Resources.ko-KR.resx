@@ -138,6 +138,12 @@
   <data name="COPY_PASSWORD" xml:space="preserve">
     <value>비밀번호 복사</value>
   </data>
+  <data name="CSV_EXPORT" xml:space="preserve">
+    <value>계정을 csv로 내보내기</value>
+  </data>
+  <data name="CSV_IMPORT" xml:space="preserve">
+    <value>csv파일에서 계정 가져오기</value>
+  </data>
   <data name="DELETE_ACCOUNT" xml:space="preserve">
     <value>계정 삭제</value>
   </data>

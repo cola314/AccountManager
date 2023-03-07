@@ -124,6 +124,24 @@ namespace AccountManager.Properties {
         }
         
         /// <summary>
+        ///   Export Accounts to csv과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string CSV_EXPORT {
+            get {
+                return ResourceManager.GetString("CSV_EXPORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Import Accounts from csv과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string CSV_IMPORT {
+            get {
+                return ResourceManager.GetString("CSV_IMPORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Delete Account과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string DELETE_ACCOUNT {

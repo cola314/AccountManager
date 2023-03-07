@@ -16,5 +16,9 @@
             <Button Command="{Binding ImportCommand}" Content="{x:Static prop:Resources.IMPORT_ACCOUNTS}" />
             <Button Command="{Binding ExportCommand}" Content="{x:Static prop:Resources.EXPORT_ACCOUNTS}" />
         </ui:SimpleStackPanel>
+        <ui:SimpleStackPanel Orientation="Horizontal" Spacing="10">
+            <Button Command="{Binding CsvImportCommand}" Content="{x:Static prop:Resources.CSV_IMPORT}" />
+            <Button Command="{Binding CsvExportCommand}" Content="{x:Static prop:Resources.CSV_EXPORT}" />
+        </ui:SimpleStackPanel>
     </ui:SimpleStackPanel>
 </UserControl>

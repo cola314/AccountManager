@@ -138,6 +138,12 @@
   <data name="COPY_PASSWORD" xml:space="preserve">
     <value>Copy Password</value>
   </data>
+  <data name="CSV_EXPORT" xml:space="preserve">
+    <value>Export Accounts to csv</value>
+  </data>
+  <data name="CSV_IMPORT" xml:space="preserve">
+    <value>Import Accounts from csv</value>
+  </data>
   <data name="DELETE_ACCOUNT" xml:space="preserve">
     <value>Delete Account</value>
   </data>
